@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment #what i want to create
+metadata:
+  name: nginx-deployment #name of deployment
+spec: #specification for deplyment
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1 #how many replicas i want
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec: #specficiation for pod
+      containers:
+      - name: nginx #we want one container inside of the pod
+        image: my_nginx #the image
+        imagePullPolicy : Never # to not go pull from dockerhub
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
