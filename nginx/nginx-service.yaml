@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: my-service
+  annotations:
+   metallb.universe.tf/allow-shared-ip: shared
 spec:
   selector:
     app: nginx
