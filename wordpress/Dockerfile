@@ -21,4 +21,4 @@ RUN apk add mariadb mariadb-common mariadb-client
 RUN /etc/init.d/mariadb setup
 COPY start.sh ./ 
 
-CMD service php-fpm7 start ; service mariadb start ; service nginx start ; sh ./start.sh ; service mariadb restart ; sleep infinity
+CMD service php-fpm7 start ; service mariadb start ; service nginx start ; sh ./start.sh ; sleep infinity
