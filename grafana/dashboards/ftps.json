@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 928,
   "graphTooltip": 1,
-  "id": 7,
-  "iteration": 1618493750987,
+  "id": 4,
+  "iteration": 1618494912889,
   "links": [],
   "panels": [
     {
@@ -44,7 +44,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 1,
       "editable": true,
       "error": false,
@@ -168,7 +168,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 1,
       "editable": true,
       "error": false,
@@ -292,7 +292,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 0,
       "editable": true,
       "error": false,
@@ -416,7 +416,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 0,
       "editable": true,
       "error": false,
@@ -540,7 +540,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 0,
       "editable": true,
       "error": false,
@@ -664,7 +664,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -799,7 +799,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -922,7 +922,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 0,
       "editable": true,
       "error": false,
@@ -1046,7 +1046,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 0,
       "editable": true,
       "error": false,
@@ -1176,7 +1176,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -1319,7 +1319,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -1462,7 +1462,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -1599,7 +1599,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -1757,7 +1757,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -1918,7 +1918,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -2055,7 +2055,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -2192,7 +2192,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -2401,7 +2401,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -2570,7 +2570,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -2718,7 +2718,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -2764,7 +2764,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 61868,
       "scopedVars": {
         "cpu": {
@@ -2882,7 +2882,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -3080,7 +3080,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -3224,7 +3224,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -3630,7 +3630,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 0,
       "editable": true,
       "error": false,
@@ -3911,7 +3911,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -4158,7 +4158,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -4454,7 +4454,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 1,
       "editable": true,
       "error": false,
@@ -4702,7 +4702,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -5096,7 +5096,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -5505,7 +5505,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -5699,7 +5699,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -5896,7 +5896,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -6159,7 +6159,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -6353,7 +6353,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -6548,7 +6548,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "decimals": 1,
       "editable": true,
       "error": false,
@@ -6739,7 +6739,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -6944,7 +6944,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -7083,7 +7083,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -7245,7 +7245,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -7451,7 +7451,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -7657,7 +7657,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -7885,7 +7885,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -8043,7 +8043,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -8262,7 +8262,7 @@
       },
       "id": 62059,
       "panels": [],
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 62056,
       "scopedVars": {
         "mountpoint": {
@@ -8279,7 +8279,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -8322,7 +8322,7 @@
       "points": false,
       "renderer": "flot",
       "repeat": null,
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 52240,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8440,7 +8440,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -8483,7 +8483,7 @@
       "points": false,
       "renderer": "flot",
       "repeat": null,
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 33458,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8662,7 +8662,7 @@
       },
       "id": 62062,
       "panels": [],
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 62056,
       "scopedVars": {
         "mountpoint": {
@@ -8679,7 +8679,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -8722,7 +8722,7 @@
       "points": false,
       "renderer": "flot",
       "repeat": null,
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 52240,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8840,7 +8840,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -8883,7 +8883,7 @@
       "points": false,
       "renderer": "flot",
       "repeat": null,
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 33458,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9062,7 +9062,7 @@
       },
       "id": 62065,
       "panels": [],
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 62056,
       "scopedVars": {
         "mountpoint": {
@@ -9079,7 +9079,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -9122,7 +9122,7 @@
       "points": false,
       "renderer": "flot",
       "repeat": null,
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 52240,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9240,7 +9240,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -9283,7 +9283,7 @@
       "points": false,
       "renderer": "flot",
       "repeat": null,
-      "repeatIteration": 1618493750987,
+      "repeatIteration": 1618494912889,
       "repeatPanelId": 33458,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9471,7 +9471,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -9607,7 +9607,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -9743,7 +9743,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -9879,7 +9879,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "influxdb-ftps",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -10072,9 +10072,9 @@
       {
         "allFormat": "glob",
         "current": {
-          "selected": false,
-          "text": "influxdb",
-          "value": "influxdb"
+          "selected": true,
+          "text": "influxdb-ftps",
+          "value": "influxdb-ftps"
         },
         "datasource": "InfluxDB telegraf",
         "description": null,
@@ -10086,6 +10086,7 @@
         "name": "datasource",
         "options": [],
         "query": "influxdb",
+        "queryValue": "",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -10164,10 +10165,10 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "influxdb",
-          "value": "influxdb"
+          "text": "ftps-service",
+          "value": "ftps-service"
         },
-        "datasource": "influxdb",
+        "datasource": "influxdb-ftps",
         "definition": "",
         "description": null,
         "error": null,
@@ -10332,7 +10333,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Influxdb dashboard",
-  "uid": "000000129",
+  "title": "Ftps dashboard",
+  "uid": "000000127",
   "version": 1
 }

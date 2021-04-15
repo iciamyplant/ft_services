@@ -2,6 +2,6 @@
 #sed "s/74b98dc7afc7/$DOCKERID/g" -i /grafana-7.5.3/conf/provisioning/dashboards/grafana.json
 #sed "s/74b98dc7afc7/$DOCKERID/g" -i /grafana-7.5.3/conf/provisioning/dashboards/influxdb.json
 
-sed "s/74b98dc7afc7/$HOSTNAME/g" -i /grafana-7.5.3/conf/provisioning/dashboards/grafana.json
-sed "s/74b98dc7afc7/$HOSTNAME/g" -i /grafana-7.5.3/conf/provisioning/dashboards/influxdb.json
+#sed "s/74b98dc7afc7/$HOSTNAME/g" -i /grafana-7.5.3/conf/provisioning/dashboards/grafana.json
+#sed "s/74b98dc7afc7/$HOSTNAME/g" -i /grafana-7.5.3/conf/provisioning/dashboards/influxdb.json
 cd ./grafana-7.5.3/bin/ && ./grafana-server

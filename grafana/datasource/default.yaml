@@ -10,3 +10,30 @@ datasources:
     password: password
     user: telegrafuser
     database: telegraf
+  - name: influxdb-nginx
+    type: influxdb
+    access: proxy
+    orgId: 1
+    uid: my_second_unique_uid
+    url: http://influxdb:8086
+    password: password
+    user: telegrafuser
+    database: nginx-database
+  - name: influxdb-ftps
+    type: influxdb
+    access: proxy
+    orgId: 1
+    uid: my_third_unique_uid
+    url: http://influxdb:8086
+    password: password
+    user: telegrafuser
+    database: ftps-database
+  - name: influxdb-grafana
+    type: influxdb
+    access: proxy
+    orgId: 1
+    uid: my_forth_unique_uid
+    url: http://influxdb:8086
+    password: password
+    user: telegrafuser
+    database: grafana-database

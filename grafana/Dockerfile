@@ -11,6 +11,8 @@ COPY ./datasource/default.yaml /grafana-7.5.3/conf/provisioning/datasources
 COPY ./provider/default.yaml /grafana-7.5.3/conf/provisioning/dashboards
 COPY ./dashboards/grafana.json /grafana-7.5.3/conf/provisioning/dashboards
 COPY ./dashboards/influxdb.json /grafana-7.5.3/conf/provisioning/dashboards
+COPY ./dashboards/nginx.json /grafana-7.5.3/conf/provisioning/dashboards
+COPY ./dashboards/ftps.json /grafana-7.5.3/conf/provisioning/dashboards
 COPY start.sh ./
 
 CMD service influxdb start ; service telegraf start ; sleep 5 ; sh ./start.sh ; sleep infinity
