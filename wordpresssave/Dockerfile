@@ -19,8 +19,9 @@ COPY wp-config.php /var/www/localhost/htdocs/wordpress
 
 RUN apk add mariadb mariadb-common mariadb-client
 RUN /etc/init.d/mariadb setup
+COPY start.sh ./ 
 
 RUN apk add php-phar ; apk add curl
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar ; chmod +x wp-cli.phar ; mv wp-cli.phar /usr/local/bin/wp
 
-CMD service php-fpm7 start ; service mariadb start ; service nginx start ; sh ./startwp.sh ; sleep infinity
+CMD service php-fpm7 start ; service mariadb start ; service nginx start ; sh ./start.sh ; sh ./startwp.sh ; sleep infinity

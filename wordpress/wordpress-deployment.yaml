@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment #what i want to create
+metadata:
+  name: wordpress-deployment #name of deployment
+spec: #specification for deplyment
+  selector:
+    matchLabels:
+      app: wordpress
+  replicas: 1 #how many replicas i want
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec: #specficiation for pod
+      containers:
+      - name: wordpress #we want one container inside of the pod
+        image: my_wordpress #the image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5050
+          name: wordpressport
