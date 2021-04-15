@@ -1,12 +1,13 @@
 FROM alpine:latest
 
-EXPOSE 80
+EXPOSE 80 5050
 
 RUN apk update ; apk add nginx ; apk add openrc
 
 RUN openrc ; touch run/openrc/softlevel
 
 COPY default.conf etc/nginx/conf.d/default.conf
+COPY startwp.sh ./
 
 RUN mkdir -p /usr/share/webapps/
 RUN wget http://wordpress.org/latest.tar.gz ; tar -xzvf latest.tar.gz ; rm latest.tar.gz ; mv wordpress /usr/share/webapps/
@@ -20,4 +21,7 @@ RUN apk add mariadb mariadb-common mariadb-client
 RUN /etc/init.d/mariadb setup
 COPY start.sh ./ 
 
-CMD service php-fpm7 start ; service mariadb start ; service nginx start ; sh ./start.sh ; sleep infinity
+RUN apk add php-phar ; apk add curl
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar ; chmod +x wp-cli.phar ; mv wp-cli.phar /usr/local/bin/wp
+
+CMD service php-fpm7 start ; service mariadb start ; service nginx start ; sh ./start.sh ; sh ./startwp.sh ; sleep infinity

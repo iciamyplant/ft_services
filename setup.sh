@@ -29,3 +29,4 @@ kubectl apply -f grafana/grafana-service.yaml
 kubectl apply -f ftps/ftps-deployment.yaml
 kubectl apply -f ftps/ftps-service.yaml
 
+#minikube dashboard
