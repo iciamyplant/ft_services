@@ -103,7 +103,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "74b98dc7afc7"
+              "value": "grafana"
             }
           ]
         }
