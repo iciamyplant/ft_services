@@ -8,6 +8,8 @@ eval $(minikube docker-env)
 
 docker build -t my_nginx nginx/.
 docker build -t my_ftps ftps/.
+docker build -t my_influxdb grafana/influxdb/.
+docker build -t my_grafana grafana/grafana/.
 
 #install metallb
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/namespace.yaml
@@ -20,5 +22,10 @@ minikube addons enable dashboard
 kubectl apply -f metallb-deployment.yaml
 kubectl apply -f nginx/nginx-deployment.yaml
 kubectl apply -f nginx/nginx-service.yaml
+kubectl apply -f influxdb-deployment.yaml
+kubectl apply -f influxdb-service.yaml
+kubectl apply -f grafana-deployment.yaml
+kubectl apply -f grafana-service.yaml
 kubectl apply -f ftps/ftps-deployment.yaml
 kubectl apply -f ftps/ftps-service.yaml
+

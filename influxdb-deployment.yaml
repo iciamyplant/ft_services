@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment #what i want to create
+metadata:
+  name: influxdb-deployment #name of deployment
+spec: #specification for deplyment
+  selector:
+    matchLabels:
+      app: influxdb
+  replicas: 1 #how many replicas i want
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec: #specficiation for pod
+      containers:
+      - name: influxdb #we want one container inside of the pod
+        image: my_influxdb #the image
+        imagePullPolicy: Never #pas aller chercher dans docker hub
+        ports:
+        - containerPort: 8086
+          name: influxdbport
