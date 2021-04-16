@@ -10,8 +10,8 @@ docker build -t my_nginx nginx/.
 docker build -t my_ftps ftps/.
 docker build -t my_influxdb influxdb/.
 docker build -t my_grafana grafana/.
-#docker build -t my_mysql mysql/.
-#docker build -t my_wordpress wordpress/.
+docker build -t my_mysql mysql/.
+docker build -t my_wordpress wordpress/.
 
 
 #install metallb
@@ -31,10 +31,10 @@ kubectl apply -f grafana/grafana-deployment.yaml
 kubectl apply -f grafana/grafana-service.yaml
 kubectl apply -f ftps/ftps-deployment.yaml
 kubectl apply -f ftps/ftps-service.yaml
-#kubectl apply -f mysql/mysql-deployment.yaml
-#kubectl apply -f wordpress/wordpress-deployment.yaml
-#kubectl apply -f mysql/mysql-service.yaml
-#kubectl apply -f wordpress/wordpress-service.yaml
+kubectl apply -f mysql/mysql-deployment.yaml
+kubectl apply -f mysql/mysql-service.yaml
+kubectl apply -f wordpress/wordpress-deployment.yaml
+kubectl apply -f wordpress/wordpress-service.yaml
 
 
 
