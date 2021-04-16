@@ -2,11 +2,12 @@ FROM alpine:latest
 
 EXPOSE 80 5000
 
-RUN apk update ; apk add nginx ; apk add openrc
+RUN apk update ; apk add telegraf ; apk add nginx ; apk add openrc
 
 RUN openrc ; touch run/openrc/softlevel
 
 COPY default.conf etc/nginx/conf.d/default.conf
+COPY telegraf.conf /etc/
 
 RUN mkdir -p /usr/share/webapps/
 RUN wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-all-languages.tar.gz ; tar zxvf phpMyAdmin-5.0.2-all-languages.tar.gz ; rm phpMyAdmin-5.0.2-all-languages.tar.gz ; mv phpMyAdmin-5.0.2-all-languages /usr/share/webapps/phpmyadmin
@@ -21,4 +22,4 @@ COPY config.inc.php /usr/share/webapps/phpmyadmin
 RUN apk add mariadb mariadb-common mariadb-client
 RUN /etc/init.d/mariadb setup
 
-CMD service php-fpm7 start ; service mariadb start ; service nginx start ; sleep infinity
+CMD service telegraf start ; service php-fpm7 start ; service mariadb start ; service nginx start ; sleep infinity

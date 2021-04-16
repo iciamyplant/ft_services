@@ -37,3 +37,30 @@ datasources:
     password: password
     user: telegrafuser
     database: grafana-database
+  - name: influxdb-wordpress
+    type: influxdb
+    access: proxy
+    orgId: 1
+    uid: my_five_unique_uid
+    url: http://influxdb:8086
+    password: password
+    user: telegrafuser
+    database: wordpress-database
+  - name: influxdb-phpmyadmin
+    type: influxdb
+    access: proxy
+    orgId: 1
+    uid: my_six_unique_uid
+    url: http://influxdb:8086
+    password: password
+    user: telegrafuser
+    database: phpmyadmin-database
+  - name: influxdb-mysql
+    type: influxdb
+    access: proxy
+    orgId: 1
+    uid: my_seven_unique_uid
+    url: http://influxdb:8086
+    password: password
+    user: telegrafuser
+    database: mysql-database

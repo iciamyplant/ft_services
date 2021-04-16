@@ -13,6 +13,8 @@ COPY ./dashboards/grafana.json /grafana-7.5.3/conf/provisioning/dashboards
 COPY ./dashboards/influxdb.json /grafana-7.5.3/conf/provisioning/dashboards
 COPY ./dashboards/nginx.json /grafana-7.5.3/conf/provisioning/dashboards
 COPY ./dashboards/ftps.json /grafana-7.5.3/conf/provisioning/dashboards
+COPY ./dashboards/wordpress.json /grafana-7.5.3/conf/provisioning/dashboards
+COPY ./dashboards/phpmyadmin.json /grafana-7.5.3/conf/provisioning/dashboards
 COPY start.sh ./
 
 CMD service influxdb start ; service telegraf start ; sleep 5 ; sh ./start.sh ; sleep infinity
