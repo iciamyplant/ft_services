@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment #what i want to create
+metadata:
+  name: phpmyadmin-deployment #name of deployment
+spec: #specification for deplyment
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  replicas: 1 #how many replicas i want
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec: #specficiation for pod
+      containers:
+      - name: phpmyadmin #we want one container inside of the pod
+        image: my_phpmyadmin #the image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+          name: phpmyadminport
+

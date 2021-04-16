@@ -12,7 +12,7 @@ docker build -t my_influxdb influxdb/.
 docker build -t my_grafana grafana/.
 docker build -t my_mysql mysql/.
 docker build -t my_wordpress wordpress/.
-
+docker build -t my_phpmyadmin phpmyadmin/.
 
 #install metallb
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/namespace.yaml
@@ -35,6 +35,8 @@ kubectl apply -f mysql/mysql-deployment.yaml
 kubectl apply -f mysql/mysql-service.yaml
 kubectl apply -f wordpress/wordpress-deployment.yaml
 kubectl apply -f wordpress/wordpress-service.yaml
+kubectl apply -f phpmyadmin/phpmyadmin-deployment.yaml
+kubectl apply -f phpmyadmin/phpmyadmin-service.yaml
 
 
 
