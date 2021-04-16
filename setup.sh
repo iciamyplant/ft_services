@@ -3,7 +3,7 @@
 kubectl delete deployments --all ; kubectl delete services --all ; kubectl delete pods --all
 #minikube restart
 minikube stop ; minikube delete
-minikube start --vm-driver=docker
+minikube start --extra-config=kubelet.eviction-hard="nodefs.available<2Gi" --vm-driver=docker
 eval $(minikube docker-env)
 
 docker build -t my_nginx nginx/.
