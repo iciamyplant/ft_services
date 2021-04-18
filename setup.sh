@@ -26,12 +26,14 @@ kubectl apply -f metallb/metallb-deployment.yaml
 kubectl apply -f nginx/nginx-deployment.yaml
 kubectl apply -f nginx/nginx-service.yaml
 kubectl apply -f influxdb/influxdb-deployment.yaml
+kubectl apply -f influxdb/influxdb-volume.yaml
 kubectl apply -f influxdb/influxdb-service.yaml
 kubectl apply -f grafana/grafana-deployment.yaml
 kubectl apply -f grafana/grafana-service.yaml
 kubectl apply -f ftps/ftps-deployment.yaml
 kubectl apply -f ftps/ftps-service.yaml
 kubectl apply -f mysql/mysql-deployment.yaml
+kubectl apply -f mysql/mysql-volume.yaml
 kubectl apply -f mysql/mysql-service.yaml
 kubectl apply -f wordpress/wordpress-deployment.yaml
 kubectl apply -f wordpress/wordpress-service.yaml
