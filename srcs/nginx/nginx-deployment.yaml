@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment #what i want to create
 metadata:
-  name: nginx-deployment #name of deployment
+  name: nginx #name of deployment
 spec: #specification for deplyment
   selector:
     matchLabels:

@@ -32,6 +32,8 @@ $cfg['Servers'][$i]['host'] = 'mysql-service';
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = true;
 $cfg['TempDir'] = 'tmp';
+$cfg['PmaAbsoluteUri'] = './';
+
 
 /**
  * phpMyAdmin configuration storage settings.

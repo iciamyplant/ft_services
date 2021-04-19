@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment #what i want to create
 metadata:
-  name: phpmyadmin-deployment #name of deployment
+  name: phpmyadmin #name of deployment
 spec: #specification for deplyment
   selector:
     matchLabels:

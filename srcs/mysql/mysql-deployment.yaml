@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment #what i want to create
 metadata:
-  name: mysql-deployment #name of deployment
+  name: mysql #name of deployment
 spec: #specification for deplyment
   selector:
     matchLabels:
