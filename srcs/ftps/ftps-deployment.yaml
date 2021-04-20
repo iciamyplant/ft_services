@@ -27,3 +27,11 @@ spec: #specification for deplyment
           name: ftpsss
         - containerPort: 21011
           name: ftpssss
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "service telegraf status && ps vsftpd"
+          initialDelaySeconds: 5
+          periodSeconds: 5

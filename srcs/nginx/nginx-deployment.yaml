@@ -21,3 +21,11 @@ spec: #specification for deplyment
           name: http
         - containerPort: 443
           name: https
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "service telegraf status && ps nginx"
+          initialDelaySeconds: 5
+          periodSeconds: 5
