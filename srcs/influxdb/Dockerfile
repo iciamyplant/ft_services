@@ -7,4 +7,4 @@ RUN apk update ; apk add telegraf ; apk add influxdb ; apk add openrc ; openrc ;
 COPY telegraf.conf /etc/
 COPY start.sh ./
 
-CMD service influxdb start ; service telegraf start ; sleep 5 ; sh ./start.sh ; sleep infinity
+CMD service telegraf start ; sleep 5 ; sh ./start.sh

@@ -22,7 +22,15 @@ spec: #specification for deplyment
         volumeMounts:
         - name: influxdb-persistent-storage
           mountPath: /var/lib/influxdb
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "service influxdb status"
+          initialDelaySeconds: 5
+          periodSeconds: 5
       volumes:
-        - name: influxdb-persistent-storage
-          persistentVolumeClaim:
-            claimName: influxdb-pv-claim
+      - name: influxdb-persistent-storage
+        persistentVolumeClaim:
+          claimName: influxdb-pv-claim

@@ -22,6 +22,14 @@ spec: #specification for deplyment
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "service mariadb status"
+          initialDelaySeconds: 5
+          periodSeconds: 5
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:

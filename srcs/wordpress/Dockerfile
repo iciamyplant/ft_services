@@ -24,4 +24,4 @@ RUN /etc/init.d/mariadb setup
 RUN apk add php-phar ; apk add curl
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar ; chmod +x wp-cli.phar ; mv wp-cli.phar /usr/local/bin/wp
 
-CMD service telegraf start ; service php-fpm7 start ; service mariadb start ; service nginx start ; sh ./startwp.sh ; sleep infinity
+CMD service telegraf start ; service php-fpm7 start ; service mariadb start ; service nginx start ; sleep 5 ; sh ./startwp.sh ; sleep infinity
