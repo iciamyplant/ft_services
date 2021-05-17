@@ -1,4 +1,5 @@
 # ft_services
+merci à mon binome @malebb
 
 KUBERNETES :
 - Déploiement : un objet qui exécute et gère N instances d'une image Docker donnée. Par exemple, vous pouvez avoir un déploiement qui lancera et gérera 10 serveurs Apache.
