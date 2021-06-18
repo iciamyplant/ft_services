@@ -22,15 +22,18 @@ avec un load balancer metallb: un service qu’il faut juster installer. Ici le 
 
 #### Kubernetes :
 - Déploiement : un objet qui exécute et gère N instances d'une image Docker donnée. Par exemple, vous pouvez avoir un déploiement qui lancera et gérera 10 serveurs Apache.
-- Service : un objet qui lie un déploiement en externe ou à d'autres conteneurs. Par exemple, un déploiement qui liera l'IP 192.168.0.1 aux 10 serveurs Apache et choisira celui qui a le moins de charge de travail. Le service existe car sinon communiquer grâce aux IP entre pods pose problème. Si un pod crash et qu’on le remplace nouvelle adresse IP. Et alors communication rompue. C’est une IP address permanent. Le cycle de vie des pods et des services est indépendant. Même si le pod meurt l’IP adress du service reste. Différents services : external services (accessible de l'extérieur) et internal services (genre la base de donnée) (configmap et secret). Tu peux tester en allant sur ton browser et tappant http://*adressedunnoeud*:*portduservice*
+- Service : un objet qui lie un déploiement en externe ou à d'autres conteneurs 
+
+(aller voir la video tuto en haut pour comprendre a quoi ca sert : en gros le service existe car sinon communiquer grâce aux IPs entre pods pose problème. Si un pod crash et qu’on le remplace il a une nouvelle adresse IP. Et alors la communication est rompue. Alors que le service c’est une IP address permanent. Le cycle de vie des pods et des services est indépendant. Même si le pod meurt l’IP adress du service reste, et donc communication possible.)
+
+Différents services : external services (accessible de l'extérieur) et internal services (genre pour une base de donnée) (configmap et secret). 
+
+Tu peux tester en allant sur ton browser et tappant http://*adressedunnoeud*:*portduservice*
+
 - Pod : un pod est une instance en cours d'exécution d'un déploiement, vous pouvez y exécuter un shell. Il a sa propre adresse IP et sa propre espace mémoire. Les pods peuvent communiquer entre eux grace à cette adresse.
 - Volumes : si un pod redémarre car il a crashé on perd toute la data : volumes attaches a physical stockage on local machine (ou cloud)
 - Replicate : on va repliquer comme ca si y a un pod qui die y a un replica en place. Le replica est connecté au même service.
 
-
-Le service a 2 fonctionnalités :
-- une adresse IP permanente
-- un load balancer
 
 #### Minikube et Kubectl :
 Minikube est le logiciel que nous utilisons pour créer une machine virtuelle qui exécute Kubernetes et assure la compatibilité avec VirtualBox.
