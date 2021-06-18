@@ -67,11 +67,11 @@ Rappel de toutes les commandes Docker [ici](https://blog.ippon.fr/2014/10/20/doc
   ```
 
 ### 2. Installer minikube et kubectl
-Pour installer sur la VM suivre les indications [ici] et notamment les commandes :
+Pour installer sur la VM suivre les indications [ici], mettre 2 CPUs et commandes :
 
   ```
 --vm-driver=docker
-eval $(minikube docker-env)
+sudo usermod -aG docker user42 ; newgrp docker  OU  eval $(minikube docker-env) : si jamais utilisé Docker 
   ```
 Minikube comporte de nombreux outils, tels qu'un tableau de bord pour voir comment vont vos pods : [doc officielle](https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/)
   ```
@@ -340,52 +340,49 @@ Avant de lancer setup.sh :
 - Si jamais utilisé Docker : sudo usermod -aG docker user42 ; newgrp docker
 
 ### 1. FTPS :
+user : ftpuser
+mdp : password
+```
 ftp-ssl -v -p 172.17.0.2
 sudo apt-get update
 sudo apt-get install ftp-ssl
-user : ftpuser
-mdp : password
 sudo apt-get install filezilla
 hote : 172.17.0.2
-
-
+```
 
 Sur FileZilla :
 à gauche site local. Fichiers qui sont sur mon ordinateur
 à droite site distant. Fichier qui sont sur mon serveur
 
-
-
-Wordpress 
+### 2. Wordpress :
 Pour accéder au administrator account 172.17.0.2:5050/wp-admin
-supervisor
-strongpassword
-→ ecrire commentaire 
+user : supervisor
+mdp : strongpassword
 
-Phpmyadmin :
-wordpress_user
-password
-→ commentaire présent dans “wordpress > wp_comments”
+Ecrire un commentaire
 
+### 3. Phpmyadmin :
+user : wordpress_user
+mdp : password
+
+Commentaire présent dans “wordpress > wp_comments”
+
+### 4. Quand on demande de supprimer des services dans la slot de correction
+```
 kubectl exec -ti service/influxdb sh
 pkill nginx
 pkill telegraf
 pkill vsftpd
 pkill mariadb
 pkill influx
+OU
+kubectl exec deploy/nginx --pkill nginx
+etc.
+```
 
-
-
-
-
-
+#### 5. Checks a faire
 => supprimer le volume influxDB et tester quand je supprime un container si la data est bien perdue. 
 => mettre volume pour mysql et vérifier que y a pas d’erreur de database connexion avec wordpress
 => tester de supprimer le container phpmyadmin voir si la data est pas perdue
 
-Si jamais y a des galères de pending
-→ vérifier si le disque est saturé
-
-kubectl exec deploy/nginx --pkill nginx
-
-
+Si jamais y a des galères de pending : vérifier si le disque est saturé !!!
