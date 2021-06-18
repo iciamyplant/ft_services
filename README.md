@@ -191,34 +191,37 @@ Y a d’autres configs que j’ai ajouté autour du ssl mais je sais pas trop si
 
 
 # Etape 6 : Wordpress
-->installer nginx tout comme pour le container nginx mais sans ssl
-→installer et configurer wordpress:
-wget -c http://wordpress.org/latest.tar.gz , puis l’extraire dans le www avec tar -xzvf latest.tar.gz
+- installer nginx tout comme pour le container nginx mais sans ssl
+- installer et configurer wordpress:
+```
+wget -c http://wordpress.org/latest.tar.gz , puis l’extraire dans le www avec : tar -xzvf latest.tar.gz
+```
 ajouter le wp-config.php contenant les infos de la database (pour DB_HOST on mettra pas localhost mais le nom du service mysql, sinon on remplace DB_NAME, DB_USER et DB_PASSWORD par les noms que on va donner dans le .sql(voir installation mysql))
-
-
-Créer des Users et automatiser l’installation wordpress (avec wp cli):
-installation: https://wp-cli.org/
-https://make.wordpress.org/cli/handboocd /guides/installing/
-->installer l’extension php phar pour que ca marche:
+- Créer des Users et automatiser l’installation wordpress (avec wp cli):
+[installation lien 1](https://wp-cli.org/)
+[installation lien 2](https://make.wordpress.org/cli/handboocd /guides/installing/)
+- installer l’extension php phar pour que ca marche:
+```
 apk add php-phar
-->installer wcli : 
+```
+- installer wcli : 
+```
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar ; mv wp-cli.phar /usr/local/bin/wp : le rendre exécutable avec la commande wp :https://developer.wordpress.org/cli/commands/
-automatiser l’installation:
-wp core install --url=172.17.0.2:5050 --title=mywebsite --admin_user=leboss --admin_password=password --admin_email=test@gmail.com --skip-email --path=/home/www/wordpress
-créer un user:
+wp core install --url=172.17.0.2:5050 --title=mywebsite --admin_user=leboss --admin_password=password --admin_email=test@gmail.com --skip-email --path=/home/www/wordpress : automatise l’installation
+```
+- créer un user :
+```
 wp user create user_name user_name@gmail.com --role=editor --path=/home/www/wordpress
-on peux remplacer le role editor par administrator, author, contributor, ou subscriber histoire d’avoir plusieurs types
+```
+On peux remplacer le role editor par administrator, author, contributor, ou subscriber histoire d’avoir plusieurs types. Pour vérifier aller au site d’installation et ajouter /wp-admin a la fin de l'url. Et verifier les users dans l’onglet users.
 
-=> pour vérifier aller au site d’installation et ajouter /wp-admin
-=> verifier les users dans l’onglet users
-
-→installer php (car wordpress c’est full fichier .php):
+- installer php (car wordpress c’est full fichier .php) :
+```
 apk add php7-fpm php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom php7-pdo php7-zip php7-mysqli php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc php7-pdo_mysql php7-pdo_sqlite php7-gettext php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib php7-curl php7-ctype
-→configurer nginx pour qu’il gère wordpress:
-
-
+```
+- configurer nginx pour qu’il gère wordpress:
+```
 config du .conf:
 dans la directive server:
 ->pour wordpress
@@ -231,11 +234,13 @@ index index.php
               fastcgi_index     index.php;
               include           fastcgi.conf;
         }
+```
 
-Comme on veut accéder à mysql depuis wordpress il faut aussi installer mariadb:
+- Comme on veut accéder à mysql depuis wordpress il faut aussi installer mariadb:
+ ```
 apk add mariadb mariadb-common mariadb-client ; /etc/init.d/mariadb setup
-démarrer tout les service dont wordpress a besoin:
-rc-service php-fpm7 start ; rc-service nginx start 
+rc-service php-fpm7 start ; rc-service nginx start : pour démarrer tout les service dont wordpress a besoin
+```
 Mysql:
 -installer mysql: https://techviewleo.com/how-to-install-mariadb-on-alpine-linux/
 apk add mariadb mariadb-common mariadb-client
@@ -383,7 +388,7 @@ kubectl exec deploy/nginx --pkill nginx
 etc.
 ```
 
-#### 5. Checks a faire
+### 5. Checks a faire
 => supprimer le volume influxDB et tester quand je supprime un container si la data est bien perdue. 
 
 => mettre volume pour mysql et vérifier que y a pas d’erreur de database connexion avec wordpress
