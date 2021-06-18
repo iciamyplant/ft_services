@@ -22,7 +22,7 @@ avec un load balancer metallb: un service qu’il faut juster installer. Ici le 
 
 #### Kubernetes :
 - Déploiement : un objet qui exécute et gère N instances d'une image Docker donnée. Par exemple, vous pouvez avoir un déploiement qui lancera et gérera 10 serveurs Apache.
-- Service : un objet qui lie un déploiement en externe ou à d'autres conteneurs 
+- Service : un objet qui lie un déploiement en externe ou à d'autres conteneurs. 
 
 (aller voir la video tuto en haut pour comprendre a quoi ca sert : en gros le service existe car sinon communiquer grâce aux IPs entre pods pose problème. Si un pod crash et qu’on le remplace il a une nouvelle adresse IP. Et alors la communication est rompue. Alors que le service c’est une IP address permanent. Le cycle de vie des pods et des services est indépendant. Même si le pod meurt l’IP adress du service reste, et donc communication possible.)
 
@@ -44,7 +44,7 @@ C'est un programme avec en ligne de commande kubectl qui simule un environnement
 - Une fois qu’on a créé un minicluster sur notre ordi, il faut interagir avec ce cluster. Créer des configs etc. C’est à ca que sert kubcetl qui est un outil en ligne de commande pour les clusters kubernetes.
 - Api server : point d’entrée dans notre cluster. C’est l’API server qui permet après de communiquer avec le cluster. Et pour parler avec l’api server il faut parler avec kubectl
 
-# Etape 2 - Docker, minikube, metallb
+# Etape 2 - Docker, minikube, kubectl
 
 ### 1. Installer Docker
 Rappel de toutes les commandes Docker [ici](https://blog.ippon.fr/2014/10/20/docker-pour-les-nu-pour-les-debutants/)
@@ -64,30 +64,41 @@ Rappel de toutes les commandes Docker [ici](https://blog.ippon.fr/2014/10/20/doc
   ```
 
 ### 2. Installer minikube et kubectl
-Minikube comporte de nombreux outils, tels qu'un tableau de bord pour voir comment vont vos pods. https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/
-kubectl get nodes ou pods (=permet de connaitre le statut des nodes)
-kubectl get deployment (pour avoir tous les déploiements en cours)
-kubectl get replicaset
-minikube status
-kubectl get services (c’est là que sont écrits ClusterIP)
-Minikube = juste pour démarrer et supprimer le cluster
-kubectl = tout le reste, toutes les configs de notre cluster
-Dans kubernetes tu ne crée pas des pods direct. Tu crée des déploiements qui créent les pods
-kubectl create deployment NAME --image=image
-kubectl create deployment nginx-depl --image=nginx
-une fois que t’as créé un deploiement et que tu fais kubectl get pod, tu vois le pod de ton déploiement
-pour debug :
-kubectl logs *nomdupod*
-kubectl exec -it *nomdupod* bash
+Minikube comporte de nombreux outils, tels qu'un tableau de bord pour voir comment vont vos pods : [doc officielle](https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/)
+  ```
+- kubectl get nodes ou pods (=permet de connaitre le statut des nodes)
+- kubectl get deployment (pour avoir tous les déploiements en cours)
+- kubectl get replicaset
+- minikube status
+- kubectl get services (c’est là que sont écrits ClusterIP)
+  ```
 
-kubectl apply -f *filename* : créer et udpater un deploiement
-mm si g fait des changements meme commande ca va juste mettre à jour le deploiement
+minikube = juste pour démarrer et supprimer le cluster
+kubectl = tout le reste, toutes les configs de notre cluster
+Dans kubernetes tu ne crée pas des pods direct. Tu crée des déploiements qui créent les pods.
+  ```
+- kubectl create deployment NAME --image=image
+- kubectl create deployment nginx-depl --image=nginx
+  ```
+
+Une fois que t’as créé un deploiement et que tu fais *kubectl get pod*, tu vois le pod de ton déploiement.
+
+  ```
+kubectl get pod
+kubectl get svc : pour avoir les services
+kubectl apply -f *filename* : créer et udpater un deploiement (meme si j'ai fait des changements meme commande ca va juste mettre à jour le deploiement)
 kubectl delete -f *file*
 kubectl delete deployment ...
-service:
-kubectl get svc
-minikube service list 
 kubectl delete service service_name
+  ```
+Pour debug :
+  ```
+- kubectl logs *nomdupod*
+- kubectl exec -it *nomdupod* bash
+  ```
+
+
+
 pour que un service LoadBalancer partage son ip: 
 annotations:
 	metallb.universe.tf/allow-shared-ip: shared
