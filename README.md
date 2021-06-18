@@ -1,28 +1,43 @@
-# ft_services
-merci à mon binome @malebb
+### Plan :
+#### Etape 1: Bien comprendre ce qu’on me demande
+#### Etape 2 : Docker, minikube, metallb
+#### Etape 3 : 
 
-KUBERNETES :
+
+merci à @malebb avec qui j'ai fait le projet et cette doc, et a la meuf qui m'a donné des conseils sur slack dont je retrouve plus le login
+
+### Etape 1: Bien comprendre ce qu’on me demande
+J'avais lu [ce github](https://github.com/t0mm4rx/ft_services) au début pour me faire une idée plus précise de ce qui était attendu du projet.
+Puis pour bien comprendre regarder [cette video tuto](https://www.youtube.com/watch?v=Wf2eSG3owoA) c'est long mais très utile.
+
+#### 1. Objectif
+Mettre une infrastructure de plusieurs déploiements en place. Chaque déploiement exécute une image Docker donnée N fois. Un déploiement de 2 serveurs Nginx par exemple.
+
+Dans chaque déploiement tournera un pod (=un conteneur) et un replica (=copie du conteneur) ayant sa propre adresse IP. En effet, Kubernetes va fournir un service de routage en assignant une adresse IP privée par conteneur.
+
+Ensuite faire des liens entre les conteneurs : par exemple, si vous avez un site Web dans un conteneur qui a besoin d'une base de données d'un autre conteneur, vous devez créer un service, qui créera un accès facile au conteneur de base de données.
+
+avec un load balancer metallb: un service qu’il faut juster installer. Ici le load balancer doit utiliser une seule adresse ip. Le réseau a donc une adresse IP externe. Et va équilibrer la charge du trafic vers les différents pod. Les requêtes de services sont alors transférées par kubernetes vers un des pods du service.
+
+#### 2. Fonctionnement
+
+##### Kubernetes :
 - Déploiement : un objet qui exécute et gère N instances d'une image Docker donnée. Par exemple, vous pouvez avoir un déploiement qui lancera et gérera 10 serveurs Apache.
-- Service : un objet qui lie un déploiement en externe ou à d'autres conteneurs. Par exemple, un déploiement qui liera l'IP 192.168.0.1 aux 10 serveurs Apache et choisira celui qui a le moins de charge de travail. 
-Le service existe car sinon communiquer grâce aux IP entre pods pose problème. Si un pod crash et qu’on le remplace nouvelle adresse IP. Et alors communication rompue. 
-C’est une IP address permanent.
-Le cycle de vie des pods et des services est indépendant. Même si le pod meurt l’IP adress du service reste.
+- Service : un objet qui lie un déploiement en externe ou à d'autres conteneurs. Par exemple, un déploiement qui liera l'IP 192.168.0.1 aux 10 serveurs Apache et choisira celui qui a le moins de charge de travail. Le service existe car sinon communiquer grâce aux IP entre pods pose problème. Si un pod crash et qu’on le remplace nouvelle adresse IP. Et alors communication rompue. C’est une IP address permanent. Le cycle de vie des pods et des services est indépendant. Même si le pod meurt l’IP adress du service reste. Différents services : external services (accessible de l'extérieur) et internal services (genre la base de donnée) (configmap et secret). Tu peux tester en allant sur ton browser et tappant http://*adressedunnoeud*:*portduservice*
+- Pod : un pod est une instance en cours d'exécution d'un déploiement, vous pouvez y exécuter un shell. Il a sa propre adresse IP et sa propre espace mémoire. Les pods peuvent communiquer entre eux grace à cette adresse.
+- Volumes : si un pod redémarre car il a crashé on perd toute la data : volumes attaches a physical stockage on local machine (ou cloud)
+- Replicate : on va repliquer comme ca si y a un pod qui die y a un replica en place. Le replica est connecté au même service.
 
-Différents services :
-external services (accessible de l'extérieur)
-internal services (genre la base de donnée) (configmap et secret)
-tu peux tester en allant sur ton browser et tappant http://*adressedunnoeud*:*portduservice*
 
-Pod : un pod est une instance en cours d'exécution d'un déploiement, vous pouvez y exécuter un shell. Il a sa propre adresse IP et sa propre espace mémoire. Les pods peuvent communiquer entre eux grace à cette adresse.
-si un pod redémarre car il a crashé on perd toute la data : volumes attaches a physical stockage on local machine (ou cloud)
-replicate : on va repliquer comme ca si y a un pod qui die y a un replica en place. Le replica est connecté au même service.
+
 
 Le service a 2 fonctionnalités :
 - une adresse IP permanente
 - un load balancer
 = define blueprints pour dire combien de replicas on veut dans le déploiement
 la database peut pas etre repliquée dans le deploiement : statefulset
-MINIKUBE & KUBECTL :
+
+##### Minikube et Kubectl :
 Minikube est le logiciel que nous utilisons pour créer une machine virtuelle qui exécute Kubernetes et assure la compatibilité avec VirtualBox.
 C'est un programme avec en ligne de commande kubectl qui simule un environnement sur kubernetes pour s'entraîner, c'est donc sur ça que se fait tout le projet ft_service.
 
