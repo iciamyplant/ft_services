@@ -1,9 +1,9 @@
-### Plan :
-#### Etape 1: Bien comprendre ce qu’on me demande
-#### Etape 2 : Docker, minikube, metallb
-#### Etape 3 : 
-
 merci à @malebb avec qui j'ai fait le projet et cette doc, et a la meuf qui m'a donné des conseils sur slack dont je retrouve plus le login
+
+### Plan :
+#### Etape 1 - Bien comprendre ce qu’on me demande
+#### Etape 2 - Docker, minikube, metallb
+#### Etape 3 - 
 
 # Etape 1: Bien comprendre ce qu’on me demande
 J'avais lu [ce github](https://github.com/t0mm4rx/ft_services) au début pour me faire une idée plus précise de ce qui était attendu du projet.
@@ -28,56 +28,39 @@ avec un load balancer metallb: un service qu’il faut juster installer. Ici le 
 - Replicate : on va repliquer comme ca si y a un pod qui die y a un replica en place. Le replica est connecté au même service.
 
 
-
-
 Le service a 2 fonctionnalités :
 - une adresse IP permanente
 - un load balancer
-= define blueprints pour dire combien de replicas on veut dans le déploiement
-la database peut pas etre repliquée dans le deploiement : statefulset
 
 #### Minikube et Kubectl :
 Minikube est le logiciel que nous utilisons pour créer une machine virtuelle qui exécute Kubernetes et assure la compatibilité avec VirtualBox.
 C'est un programme avec en ligne de commande kubectl qui simule un environnement sur kubernetes pour s'entraîner, c'est donc sur ça que se fait tout le projet ft_service.
 
-Dans minikube : un noeud dans lequel y a : les noeuds esclaves + le noeud master + docker préinstallé. C’est un cluster a noeud unique.
-minikube marchera sur notre ordi via une virtualbox 
-Une fois qu’on a créé un minicluster sur notre ordi, il faut interagir avec ce cluster. Créer des configs etc. C’est à ca que sert kubcetl qui est un outil en ligne de commande pour les clusters kubernetes.
-api server : point d’entrée dans notre cluster. C’est l’API server qui permet après de communiquer avec le cluster. Et pour parler avec l’api server il faut parler avec kubectl
+- Dans minikube : un noeud dans lequel y a : les noeuds esclaves + le noeud master + docker préinstallé. C’est un cluster a noeud unique.
+- Minikube marchera sur notre ordi via une virtualbox 
+- Une fois qu’on a créé un minicluster sur notre ordi, il faut interagir avec ce cluster. Créer des configs etc. C’est à ca que sert kubcetl qui est un outil en ligne de commande pour les clusters kubernetes.
+- Api server : point d’entrée dans notre cluster. C’est l’API server qui permet après de communiquer avec le cluster. Et pour parler avec l’api server il faut parler avec kubectl
 
+# Etape 2 - Docker, minikube, metallb
 
-Etape 1: Bien comprendre ce qu’on me demande 
-j'avais lu ce github au début pour me faire une idée plus précise de ce qui était attendu du projet : https://github.com/t0mm4rx/ft_services
+### 1. Installer Docker
+Rappel de toutes les commandes Docker [ici](https://blog.ippon.fr/2014/10/20/docker-pour-les-nu-pour-les-debutants/)
+  ```
+- sudo docker images
+- sudo docker container ls (= sudo docker ps, liste les container qui sont en train de tourner)
+- sudo docker ps -a (tous les container pas que ceux en train de run)
+- sudo docker run *nomdelimage* : on va voir une boucle infinie pour pas de boucle infinie faire: sudo docker run -d *nomimage*
+- les ports : rediriger le port 80 interne au container au port 8080 de la machine hôte : sudo docker run -d -p 8080:80 *nomimage*
+- rediriger plusieurs ports : sudo docker run -d -p 8080:80 -p 3000:80 *nomimage*
+- docker stop *nomcontainer*
+- docker start *nomcontainer*
+- sudo docker rm $(sudo docker ps -aq) = (supprimer tous les containers)
+- sudo docker rm -f $(sudo docker ps -aq) = (supprimer tous les containers, meme ceux en train de run)
+- sudo docker exec -it *nomconteneurouid* bash (-i for interactive)
+- sudo docker exec --help
+  ```
 
-
-Mettre une infrastructure de plusieurs déploiements en place. Chaque déploiement exécute une image Docker donnée N fois. Un déploiement de 2 serveurs Nginx par exemple.
-Dans chaque déploiement tournera un pod (=un conteneur) et un replica (=copie du conteneur) ayant sa propre adresse IP. En effet, Kubernetes va fournir un service de routage en assignant une adresse IP privée par conteneur.
-Ensuite faire des liens entre les conteneurs : par exemple, si vous avez un site Web dans un conteneur qui a besoin d'une base de données d'un autre conteneur, vous devez créer un service, qui créera un accès facile au conteneur de base de données.
-
-
-avec un load balancer metallb: un service qu’il faut juster installer
-Ici le load balancer doit utiliser une seule adresse ip. Le réseau a donc une adresse IP externe.
-Et va équilibrer la charge du trafic vers les différents pod. Les requêtes de services sont alors transférées par kubernetes vers un des pods du service.
-
-
-Etape 2 : Docker, mini kube, metallb:
-Installer Docker
-Petits rappels (build des images, dockerfile, run ….) Rappel de toutes les commandes Docker : https://blog.ippon.fr/2014/10/20/docker-pour-les-nu-pour-les-debutants/
-sudo docker images
-sudo docker container ls (= sudo docker ps, liste les container qui sont en train de tourner)
-sudo docker ps -a (tous les container pas que ceux en train de run)
-sudo docker run *nomdelimage* : on va voir une boucle infinie pour pas de boucle infinie faire: sudo docker run -d *nomimage*
-les ports : rediriger le port 80 interne au container au port 8080 de la machine hôte : sudo docker run -d -p 8080:80 *nomimage*
-rediriger plusieurs ports : sudo docker run -d -p 8080:80 -p 3000:80 *nomimage*
-docker stop *nomcontainer*
-docker start *nomcontainer*
-sudo docker rm $(sudo docker ps -aq) = (supprimer tous les containers)
-sudo docker rm -f $(sudo docker ps -aq) = (supprimer tous les containers, meme ceux en train de run)
-sudo docker exec -it *nomconteneurouid* bash (-i for interactive)
-sudo docker exec --help
-
-
-Installer minikube et kubectl
+### 2. Installer minikube et kubectl
 Minikube comporte de nombreux outils, tels qu'un tableau de bord pour voir comment vont vos pods. https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/
 kubectl get nodes ou pods (=permet de connaitre le statut des nodes)
 kubectl get deployment (pour avoir tous les déploiements en cours)
