@@ -241,36 +241,46 @@ index index.php
 apk add mariadb mariadb-common mariadb-client ; /etc/init.d/mariadb setup
 rc-service php-fpm7 start ; rc-service nginx start : pour démarrer tout les service dont wordpress a besoin
 ```
-Mysql:
--installer mysql: https://techviewleo.com/how-to-install-mariadb-on-alpine-linux/
+
+# Etape 7 : Mysql
+- installer mysql: https://techviewleo.com/how-to-install-mariadb-on-alpine-linux/
+ ```
 apk add mariadb mariadb-common mariadb-client
--créer un user et lui accorder tout les droit sur la database: mysql < fichier.sql dans le CMD
+ ```
+- créer un user et lui accorder tout les droit sur la database: 
+ ```
+ mysql < fichier.sql dans le CMD
+ ```
 - creer le .sql: https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+ ```
 CREATE DATABASE nomDatabase;
 GRANT ALL ON nomDatabase.* TO 'nomUser'@'%' IDENTIFIED BY 'password';
 FLUSH PRIVILEGES;
-Phpmyadmin:
-comme pour wordpress, on reinstalle nginx sans ssl
-installation: https://wiki.alpinelinux.org/wiki/PhpMyAdmin
-installer php:
+ ```
 
-les même package que pour wordpress:
+# Etape 8 : Phpmyadmin
+Comme pour wordpress, on reinstalle nginx sans ssl
+[installation lien](https://wiki.alpinelinux.org/wiki/PhpMyAdmin)
+- installer php, Les même package que pour wordpress:
+ ```
 apk add php7-fpm php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom php7-pdo php7-zip php7-mysqli php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc php7-pdo_mysql php7-pdo_sqlite php7-gettext php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib php7-curl php7-ctype
 avec eux en bonus:
 apk add php7-fpm php7-common php7-session php7-iconv php7-json php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap php7-ctype php7-dom
+ ```
 
-installer phpmyadmin(ici on creer un lien symbolique pour le laisser dans /usr/share/webapps et qu’il soit accessible dans notre www):
+- installer phpmyadmin(ici on creer un lien symbolique pour le laisser dans /usr/share/webapps et qu’il soit accessible dans notre www):
+ ```
 mkdir -p /usr/share/webapps ; cd /usr/share/webapps ; wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-all-languages.tar.gz ; tar zxvf phpMyAdmin-5.0.2-all-languages.tar.gz ; rm phpMyAdmin-5.0.2-all-languages.tar.gz ; mv phpMyAdmin-5.0.2-all-languages phpmyadmin ; chmod -R 777 /usr/share/webapps/ ; ln -s /usr/share/webapps/phpmyadmin/ /home/www/phpmyadmin
-
-configurer phpmyadmin(avec config.inc.php):
+ ```
+- configurer phpmyadmin(avec config.inc.php):
 ajouter le fichier config.inc.php dans /usr/webapps/phpmyadmin/
-->par défaut phpmyadmin est configuré sur localhost donc remplacer par le nom du service mysql:
+- par défaut phpmyadmin est configuré sur localhost donc remplacer par le nom du service mysql:
+ ```
 $cfg['Servers'][$i]['host'] = 'nom_service_mysql';
-
 le .conf nginx:
 root /chemin/vers/dossier/phpmyadmin
 index index.php
-
+ ```
 deployment: https://www.serverlab.ca/tutorials/containers/kubernetes/deploy-phpmyadmin-to-kubernetes-to-manage-mysql-pods/
 modif dans le tuto:
 pour le deployment remplacer les port 80 par des 5000 et le PMAHOST par le nom de notre service mysql, et le MYSQL_ROOT_PASSWORD par le mdp mysql et changer limage par l’ image local en ajoutant aussi imagePullPolicy: Never
@@ -281,11 +291,13 @@ type: LoadBalancer
   loadBalancerIP: 172.17.0.2
 
 
-comme phpmyadmin utilise la base de donnee on installe mariadb avec:
+- comme phpmyadmin utilise la base de donnee on installe mariadb avec:
+ ```
 apk add mariadb mariadb-common mariadb-client ; /etc/init.d/mariadb setup
+ ```
+- et on oublie pas de start nginx et php-fmp7 au lancement du container
 
-et on oublie pas de start nginx et php-fmp7 au lancement du container
-
+# Etape 9 : Volumes et redirections de fin
 Persistent volumes: (lier mysql et wordpress):
 on va save notre dossier/var/lib/mysql avec un persistentVolumeClaim (PVC)
 https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
@@ -327,15 +339,13 @@ Utile pour tous les containers:
 rc-status    pour lister les services
 
 
-dashboard :
-minikube dashboard pour ouvrir le dashboard
-→ on passe par les addons = modules complémentaires de minikube
+# Etape 10 : Dashboard
+minikube dashboard pour ouvrir le dashboard. On passe par les addons = modules complémentaires de minikube
+ ```
+minikube dashboard
 minikube addons list
+ ```
 et ajouter des addons s’ils s’y trouvent pas : minikube addons enable ADDON_NAME [flags]
-
-
-Probleme Disk Pressure :
-fd -h --total pour avoir le disque utilisé
 
 
 # Conseils avant la correction
@@ -395,4 +405,4 @@ etc.
 
 => tester de supprimer le container phpmyadmin voir si la data est pas perdue
 
-Si jamais y a des galères de pending : vérifier si le disque est saturé !!!
+Si jamais y a des galères de pending : vérifier si le disque est saturé avec *fd -h --total* pour avoir le disque utilisé !!!
