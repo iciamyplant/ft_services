@@ -341,6 +341,7 @@ Avant de lancer setup.sh :
 
 ### 1. FTPS :
 user : ftpuser
+
 mdp : password
 ```
 ftp-ssl -v -p 172.17.0.2
@@ -351,18 +352,20 @@ hote : 172.17.0.2
 ```
 
 Sur FileZilla :
-à gauche site local. Fichiers qui sont sur mon ordinateur
-à droite site distant. Fichier qui sont sur mon serveur
+- à gauche site local. Fichiers qui sont sur mon ordinateur
+- à droite site distant. Fichier qui sont sur mon serveur
 
 ### 2. Wordpress :
 Pour accéder au administrator account 172.17.0.2:5050/wp-admin
 user : supervisor
+
 mdp : strongpassword
 
 Ecrire un commentaire
 
 ### 3. Phpmyadmin :
 user : wordpress_user
+
 mdp : password
 
 Commentaire présent dans “wordpress > wp_comments”
@@ -382,7 +385,9 @@ etc.
 
 #### 5. Checks a faire
 => supprimer le volume influxDB et tester quand je supprime un container si la data est bien perdue. 
+
 => mettre volume pour mysql et vérifier que y a pas d’erreur de database connexion avec wordpress
+
 => tester de supprimer le container phpmyadmin voir si la data est pas perdue
 
 Si jamais y a des galères de pending : vérifier si le disque est saturé !!!
