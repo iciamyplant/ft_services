@@ -114,6 +114,7 @@ Pour debug :
 # Etape 3 - Metallb
 ### 1. Installer metallb
 [documentation pour installer](https://metallb.universe.tf/installation/)
+[video tuto](https://www.youtube.com/watch?v=xYiYIjlAgHY)
 
 En lançant des 'manifest' en gros des scripts de config dans kubernetes qui font tout le travail. Ca va surtout servir à attribuer des IP a tes services, et comme dans ce projet, on veut qu'ils aient tous la même adresse IP : il suffit de le configurer en mettant une range d'adresses IP avec 2 fois la même adresse IP, et donc celle que tu génères en faisant la commande du point 4/ du notion au dessus.
 
@@ -138,6 +139,7 @@ kubectl get all
 
 
 # Etape 4 : Nginx
+[documentation](https://wiki.alpinelinux.org/wiki/Nginx)
 - installer nginx
 
 ```
@@ -147,7 +149,6 @@ sleep infinity
   ```
 - configuer
 - ssl
-- ingress
 
 voir les nginx en cours : sudo lsof -nP | grep LISTEN
 → dabord installer nginx :
