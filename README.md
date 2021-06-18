@@ -1,12 +1,16 @@
 merci à @malebb avec qui j'ai fait le projet et cette doc, et a la meuf qui m'a donné des conseils sur slack dont je retrouve plus le login
 
 ### Plan :
-#### Etape 1 - Bien comprendre ce qu’on me demande
-#### Etape 2 - Docker, minikube, kubectl
-#### Etape 3 - Metallb
-#### Etape 4 - Nginx
-#### Etape 5 - FTPS
-#### Conseils avant la correction
+- Etape 1 - Bien comprendre ce qu’on me demande
+- Etape 2 - Docker, minikube, kubectl
+- Etape 3 - Metallb
+- Etape 4 - Nginx
+- Etape 5 - FTPS
+- Etape 6 - Wordpress
+- Etape 7 - Mysql
+- Etape 8 - Phpmyadmin
+- Etape 9 - Volumes et redirections de fin
+- Conseils avant la correction
 
 # Etape 1: Bien comprendre ce qu’on me demande
 J'avais lu [ce github](https://github.com/t0mm4rx/ft_services) au début pour me faire une idée plus précise de ce qui était attendu du projet.
