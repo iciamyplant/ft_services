@@ -2,8 +2,11 @@ merci à @malebb avec qui j'ai fait le projet et cette doc, et a la meuf qui m'a
 
 ### Plan :
 #### Etape 1 - Bien comprendre ce qu’on me demande
-#### Etape 2 - Docker, minikube, metallb
-#### Etape 3 - 
+#### Etape 2 - Docker, minikube, kubectl
+#### Etape 3 - Metallb
+#### Etape 4 - Nginx
+#### Etape 5 - FTPS
+#### Conseils avant la correction
 
 # Etape 1: Bien comprendre ce qu’on me demande
 J'avais lu [ce github](https://github.com/t0mm4rx/ft_services) au début pour me faire une idée plus précise de ce qui était attendu du projet.
@@ -64,6 +67,12 @@ Rappel de toutes les commandes Docker [ici](https://blog.ippon.fr/2014/10/20/doc
   ```
 
 ### 2. Installer minikube et kubectl
+Pour installer sur la VM suivre les indications [ici] et notamment les commandes :
+
+  ```
+--vm-driver=docker
+eval $(minikube docker-env)
+  ```
 Minikube comporte de nombreux outils, tels qu'un tableau de bord pour voir comment vont vos pods : [doc officielle](https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/)
   ```
 - kubectl get nodes ou pods (=permet de connaitre le statut des nodes)
@@ -98,87 +107,90 @@ Pour debug :
   ```
 
 
+# Etape 3 - Metallb
+### 1. Installer metallb
+[documentation pour installer](https://metallb.universe.tf/installation/)
 
-pour que un service LoadBalancer partage son ip: 
+En lançant des 'manifest' en gros des scripts de config dans kubernetes qui font tout le travail. Ca va surtout servir à attribuer des IP a tes services, et comme dans ce projet, on veut qu'ils aient tous la même adresse IP : il suffit de le configurer en mettant une range d'adresses IP avec 2 fois la même adresse IP, et donc celle que tu génères en faisant la commande du point 4/ du notion au dessus.
+
+
+[Autre documentation dare](https://devopslearning.medium.com/metallb-load-balancer-for-bare-metal-kubernetes-43686aa0724f)
+
+pour que un service LoadBalancer partage son ip mettre dans le yaml : 
 annotations:
 	metallb.universe.tf/allow-shared-ip: shared
 
 the connection to the server 127.0.0.1:49153 was refused - did you specify the right host or port ? : refaire commande : minikube start --vm-driver=docker
 
----------debugging pods https://www.youtube.com/watch?v=Wf2eSG3owoA
-      	>   kubectl exec -it FullDeployName -- /bin/sh (exécuter des commandes dans un container)
 
 
-installer metallb 
-https://minikube.sigs.k8s.io/docs/commands/addons/
-en lançant des 'manifest' en gros des scripts de config dans kubernetes qui font tout le travail. Ca va surtout servir à attribuer des IP a tes services, et comme dans ce projet, on veut qu'ils aient tous la même adresse IP : il suffit de le configurer en mettant une range d'adresses IP avec 2 fois la même adresse IP, et donc celle que tu génères en faisant la commande du point 4/ du notion au dessus.
-https://metallb.universe.tf/installation/ : (installation)
 Minikube IP : CLUSTER_IP="$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p)"
 
 erreur a la premire install :
 pod/speaker-htxfd                 0/1     CreateContainerConfigError
 il faut faire : eval $(minikube docker-env)
 et mettre le secret
-https://devopslearning.medium.com/metallb-load-balancer-for-bare-metal-kubernetes-43686aa0724f
 kubectl get all
 
 
+# Etape 4 : Nginx
+- installer nginx
 
-Etape 3 :
-Nginx :
-installer nginx
-configuer
-ssl
-ingress
+```
+apk add nginx
+service nginx start
+sleep infinity
+  ```
+- configuer
+- ssl
+- ingress
+
 voir les nginx en cours : sudo lsof -nP | grep LISTEN
 → dabord installer nginx :
-apk add nginx
-nginx -d daemon off
-sleep infinity
 → ensuite configurer. docker exec -ti test4 bin/sh et pas bash
 https://www.youtube.com/watch?v=4SswbTwkOZA
 https://www.youtube.com/watch?v=X3Pr5VATOyA
-https://codingwithmanny.medium.com/configure-self-signed-ssl-for-nginx-docker-from-a-scratch-7c2bcd5478c6
-firefox redirects http to https
+Firefox redirects http to https
 
-FTPS :
-Etape 1 : Créer un serveur FTP
-Ca ressemble à Nginx, il faut apk add vsftpd
-démarrer vsftpd avec  : service vsftpd start ; sleep infinity
-Avant de faire les config tu peux rentrer dans le conteneur tester s’il tourne avec service vsftpd status
-Ensuite faut savoir que pour tester mon serveur ftp j’ai utilisé deux trucs différents :
-Le premier c’est la commande : ftp -v -p localhost
-Qui va servir à voir les retours d’erreur et vérifier si ça fonctionne. 
-Le second c’est le logiciel FileZilla, que j’ai téléchargé. Et ensuite quand t’ouvre le logiciel genre la partie à gauche c’est les fichiers de ton ordinateur donc de la vm et la partie à droite c’est les fichiers de ton serveur. Et FileZilla il me servait à tester si j’arrive à transférer de la gauche à la droite un fichier(en mode drag and drop). (+ attention aux droits du fichier). Dans FileZilla t’as plusieurs cases : en haut t’as “host” là tu pourras mettre 172.0.0.1 ensuite t’as username password :
-Donc il faut créer l’utilisateur et son mot de passe qui a accès au serveur FTP.
-RUN adduser -D ftpuser ; echo "ftpuser:password"  | chpasswd
-Faut utiliser la commande adduser. Ici l’utilisateur c’est ftpuser et le mot de passe c’est password.
-pour le port c’est 21. Mais ca marche pas si on ouvre pas plusieurs port pas seulement le 21 de base. Faut ouvrir le 20 et j’ai ouvert aussi les 21009 21010 et 21011.
+# Etape 5 : FTPS
+### 1. Définition
+- Un serveur FTP : est un logiciel utilisé dans le transfert de fichiers entre deux ordinateurs. Un serveur FTP installé sur un ordinateur autorise le téléchargement, la lecture, la modification ou la suppression à distance, via Internet ou un réseau local, de fichiers par un utilisateur. L'investigateur de ces échanges de fichiers est appelé client FTP.
+- Mode Actif : en mode actif, c'est le client FTP qui va déterminer le port à utiliser et le serveur FTP qui initialise la connexion.
+- Mode passif : Après la connexion sur le port 21 le serveur FTP va dire au client sur quel port se fera le transfert de données. Il renvoie donc une adresse IP à laquelle le client FTP doit se connecter pour transférer un fichier. En revanche, c'est votre client FTP qui va initialiser la connexion au serveur FTP de votre hébergeur
 
+### 2. Créer un serveur FTP
+- Ca ressemble à Nginx, il faut apk add vsftpd
+- Démarrer vsftpd avec  : service vsftpd start ; sleep infinity
+- Avant de faire les config tu peux rentrer dans le conteneur tester s’il tourne avec service vsftpd status
+- Ensuite faut savoir que pour tester mon serveur ftp j’ai utilisé deux trucs différents. La commande *ftp -v -p localhost* : Qui va servir à voir les retours d’erreur et vérifier si ça fonctionne. Le second c’est le logiciel FileZilla, que j’ai téléchargé. Et ensuite quand t’ouvre le logiciel genre la partie à gauche c’est les fichiers de ton ordinateur donc de la vm et la partie à droite c’est les fichiers de ton serveur. Et FileZilla il me servait à tester si j’arrive à transférer de la gauche à la droite un fichier(en mode drag and drop). (+ attention aux droits du fichier). Dans FileZilla t’as plusieurs cases : en haut t’as “host” là tu pourras mettre 172.0.0.1 ensuite t’as username password. Donc il faut :
+- créer l’utilisateur et son mot de passe qui a accès au serveur FTP. *RUN adduser -D ftpuser ; echo "ftpuser:password"  | chpasswd* Faut utiliser la commande adduser. Ici l’utilisateur c’est ftpuser et le mot de passe c’est password.
+- pour le port c’est 21. Mais ca marche pas si on ouvre pas plusieurs port pas seulement le 21 de base. Faut ouvrir le 20 et j’ai ouvert aussi les 21009 21010 et 21011.
 
-Etape 2 : Faire les configs
-Ensuite il faut modifier le fichier de config vsftpd.conf
-J’ai suivi plusieurs tutos
-ici t’as tout le man des configs : http://vsftpd.beasts.org/vsftpd_conf.html
-→ perso au début j’avais une erreur je crois c’était 501 et du coup j’avais trouvé sur un forum cette commande : seccomp_sandbox=NO dans le fichier config et ça m'avait enlevé mon erreur.
+### 3. Faire les configs
+Ensuite il faut modifier le fichier de config vsftpd.conf.
+J’ai suivi plusieurs tutos, [ici](http://vsftpd.beasts.org/vsftpd_conf.html) t’as tout le man des configs.
+Perso au début j’avais une erreur je crois c’était 501 et du coup j’avais trouvé sur un forum cette commande : seccomp_sandbox=NO dans le fichier config et ça m'avait enlevé mon erreur.
 
-→ Là tu peux tester et normalement avec ftp il va se connecter à ton serveur et il va te demander user et le mot de passe et ensuite il te dira si tout est OK.
+Là tu peux tester et normalement avec ftp il va se connecter à ton serveur et il va te demander user et le mot de passe et ensuite il te dira si tout est OK.
 
-Etape 3 : Ajouter le ssl pour avoir un serveur FTPS
-un tuto qui m’a aidé : https://www.youtube.com/watch?v=TrTrTHALWjg
+### 4. Ajouter le ssl pour avoir un serveur FTPS
+[Ce tuto](https://www.youtube.com/watch?v=TrTrTHALWjg) m’a aidé
+
+```
 apk add openssl ; openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=FR/ST=France/L=Paris/O=42/OU=42/CN=localhost" -keyout /etc/ssl/private/example.key -out /etc/ssl/private/example.crt
+```
 configurer le fichier vsftpd.conf pour le certificat ssl dans le fichier config: 
+```
 ssl_enable=YES
 rsa_cert_file=/etc/ssl/private/example.crt
 rsa_private_key_file=/etc/ssl/private/example.key
-Y a d’autres configs que j’ai ajouté autour du ssl mais je sais pas trop si elles sont obligatoires. Tu peux check dans le man à quoi sert chaque config si tu te demande
-faut savoir que là par contre pour tester j’ai plus utilisé ftp -v -p localhost parce que y a pas écrit si le certificat ssl est activé ou pas. Du coup j’ai installé les packages qu’il fallait et j’ai utilisé ftp-ssl -v -p localhost.
+```
+Y a d’autres configs que j’ai ajouté autour du ssl mais je sais pas trop si elles sont obligatoires. Tu peux check dans le man à quoi sert chaque config si tu te demande. Faut savoir que là par contre pour tester j’ai plus utilisé ftp -v -p localhost parce que y a pas écrit si le certificat ssl est activé ou pas. Du coup j’ai installé les packages qu’il fallait et j’ai utilisé *ftp-ssl -v -p localhost*.
 
-→ attention faut pouvoir transférer les fichiers de gauche à droite avec FileZilla.
+→ Attention faut pouvoir transférer les fichiers de gauche à droite avec FileZilla.
 
 
-
-wordpress:
+# Etape 6 : Wordpress
 ->installer nginx tout comme pour le container nginx mais sans ssl
 →installer et configurer wordpress:
 wget -c http://wordpress.org/latest.tar.gz , puis l’extraire dans le www avec tar -xzvf latest.tar.gz
@@ -319,5 +331,61 @@ et ajouter des addons s’ils s’y trouvent pas : minikube addons enable ADDON_
 
 Probleme Disk Pressure :
 fd -h --total pour avoir le disque utilisé
+
+
+# Conseils avant la correction
+
+Avant de lancer setup.sh :
+- Mettre au moins 2 CPU sur la VM
+- Si jamais utilisé Docker : sudo usermod -aG docker user42 ; newgrp docker
+
+### 1. FTPS :
+ftp-ssl -v -p 172.17.0.2
+sudo apt-get update
+sudo apt-get install ftp-ssl
+user : ftpuser
+mdp : password
+sudo apt-get install filezilla
+hote : 172.17.0.2
+
+
+
+Sur FileZilla :
+à gauche site local. Fichiers qui sont sur mon ordinateur
+à droite site distant. Fichier qui sont sur mon serveur
+
+
+
+Wordpress 
+Pour accéder au administrator account 172.17.0.2:5050/wp-admin
+supervisor
+strongpassword
+→ ecrire commentaire 
+
+Phpmyadmin :
+wordpress_user
+password
+→ commentaire présent dans “wordpress > wp_comments”
+
+kubectl exec -ti service/influxdb sh
+pkill nginx
+pkill telegraf
+pkill vsftpd
+pkill mariadb
+pkill influx
+
+
+
+
+
+
+=> supprimer le volume influxDB et tester quand je supprime un container si la data est bien perdue. 
+=> mettre volume pour mysql et vérifier que y a pas d’erreur de database connexion avec wordpress
+=> tester de supprimer le container phpmyadmin voir si la data est pas perdue
+
+Si jamais y a des galères de pending
+→ vérifier si le disque est saturé
+
+kubectl exec deploy/nginx --pkill nginx
 
 
