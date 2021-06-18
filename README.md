@@ -71,7 +71,7 @@ Rappel de toutes les commandes Docker [ici](https://blog.ippon.fr/2014/10/20/doc
   ```
 
 ### 2. Installer minikube et kubectl
-Pour installer sur la VM suivre les indications [ici], mettre 2 CPUs et commandes :
+Pour installer sur la VM suivre les indications [ici](https://www.notion.so/Ft_services-VM-852d4f9b0d9a42c1a2de921e4a2ac417), mettre 2 CPUs et commandes :
 
   ```
 --vm-driver=docker
